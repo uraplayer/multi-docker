@@ -16,10 +16,10 @@ after_success:
 
 #Log in to the docker CLI
 
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+#- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 #Push images to docker hub
-- docker push uraplayer/multi-client
-- docker push uraplayer/multi-nginx
-- docker push uraplayer/multi-server
-- docker push uraplayer/multi-worker
+#- docker push uraplayer/multi-client
+#- docker push uraplayer/multi-nginx
+#- docker push uraplayer/multi-server
+#- docker push uraplayer/multi-worker
