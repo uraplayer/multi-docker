@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t uraplayer/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run uraplayer/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t uraplayer/multi-client ./client
+  - docker build -t uraplayer/multi-nginx ./nginx
+  - docker build -t uraplayer/multi-server ./server
+  - docker build -t uraplayer/multi-worker ./worker
+
+#Log in to the docker CLI
+
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+#Push images to docker hub
+- docker push uraplayer/multi-client
+- docker push uraplayer/multi-nginx
+- docker push uraplayer/multi-server
+- docker push uraplayer/multi-worker
